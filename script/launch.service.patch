@@ -1,0 +1,8 @@
+--- a/actions/services/launch.service
++++ b/actions/services/launch.service
+@@ -7,4 +7,4 @@ StartLimitIntervalSec=0
+ [Service]
+ Type=simple
+ User=build
+-ExecStart=/bin/bash -c '. ~/.profile && cd "$LAUNCH_PATH" && script/server --no-build --devfabric --use-aqueduct > "$LAUNCH_PATH/output.log" 2>&1'
++ExecStart=/bin/bash -c '. ~/.profile && cd "$LAUNCH_PATH" && script/server --no-build --devfabric --use-aqueduct --earthsmoke-dotcom > "$LAUNCH_PATH/output.log" 2>&1'
