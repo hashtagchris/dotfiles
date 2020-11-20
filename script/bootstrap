@@ -4,6 +4,6 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 if [ -f /etc/systemd/system/launch.service ]; then
   pushd /etc/systemd/system/
-  sudo patch -f <$SCRIPT_DIR/launch.service.patch
+  # sudo patch -f <$SCRIPT_DIR/launch.service.patch
   popd
 fi
