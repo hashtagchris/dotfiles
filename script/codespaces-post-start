@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cat >> ~/.profile << HERE
+cat >> ~/.bashrc << HERE
 
 # hashtagchris/dotfile additions
 export PATH=\$PATH:/workspaces/github/bin
