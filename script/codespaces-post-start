@@ -1,5 +1,9 @@
 #!/bin/sh
 
+echo "" >> /tmp/my-log
+echo "invoke: $0" >> /tmp/my-log
+echo "pwd: `pwd`" >> /tmp/my-log
+
 cat >> ~/.bashrc << HERE
 
 # hashtagchris/dotfile additions
