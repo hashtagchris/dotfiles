@@ -1,8 +1,12 @@
 #!/bin/sh
 
+SELFDIR=$(cd "$(dirname "$0")"; pwd)
+
 echo "" >> /tmp/my-log
 echo "invoke: $0" >> /tmp/my-log
 echo "pwd: `pwd`" >> /tmp/my-log
+echo "SELFDIR: $SELFDIR" >> /tmp/my-log
+ls -la >> /tmp/my-log
 
 cat >> ~/.bashrc << HERE
 
