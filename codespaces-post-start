@@ -8,6 +8,8 @@ echo "pwd: `pwd`" >> /tmp/my-log
 echo "SELFDIR: $SELFDIR" >> /tmp/my-log
 ls -la >> /tmp/my-log
 
+cp $SELFDIR/.tmux.conf ~/
+
 cat >> ~/.bashrc << HERE
 
 # hashtagchris/dotfile additions
