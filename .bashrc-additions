@@ -2,7 +2,26 @@
 # https://github.com/hashtagchris/dotfiles/blob/main/.bashrc-additions
 export PATH=$PATH:$HOME/go/bin:/workspaces/github/bin
 
-# Give each codespace a unique prompt
+# golang setup
+if command -v go > /dev/null
+then
+    # ensure GOBIN is set
+    if [ -z $GOBIN ]
+    then
+        export GOBIN="$(go env GOPATH)/bin"
+    fi
+
+    # add GOBIN to path
+    export PATH=$PATH:$GOBIN
+fi
+
+# path updates
+if [ "github/github" == $GITHUB_REPOSITORY ]
+then
+    export PATH=$PATH:/workspaces/github/bin
+fi
+
+# give each codespace a unique prompt
 # https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux
 __custom_bash_prompt() {
     local petname="\[\033[0;31m\][SET ~/.petname]"
