@@ -23,8 +23,11 @@ __custom_bash_prompt() {
 }
 __custom_bash_prompt
 
-# short for GitHub Authentication
+# gha is short for GitHub Authentication
+# Use this if you have repository write but git push fails with 403 Forbidden or similar
 gha() {
+    install_github_cli
+
     if command -v gh > /dev/null
     then
         unset GITHUB_TOKEN
@@ -32,6 +35,27 @@ gha() {
         token="$(gh config get -h github.com oauth_token)"
         export GITHUB_TOKEN="$token"
     else
-        echo "Install the GitHub cli first, then re-attempt. See https://github.com/cli/cli/blob/trunk/docs/install_linux.md"
+        echo "Install the GitHub cli first, then re-attempt."
+    fi
+}
+
+# installs the github cli if it's not already installed
+install_github_cli() {
+    if ! command -v gh
+    then
+        echo "Attempting to install github cli"
+        if command -v apt
+        then
+            # Might have to register another package source
+            # https://github.com/cli/cli/blob/trunk/docs/install_linux.md
+            sudo apt install -y gh
+        else
+            if command -v apk
+            then
+                sudo apk update && sudo apk add --no-cache github-cli
+            else
+                echo "github cli not installed, don't know how to install it. See https://github.com/cli/cli/blob/trunk/docs/install_linux.md"
+            fi
+        fi
     fi
 }

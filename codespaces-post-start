@@ -3,25 +3,6 @@
 
 SELFDIR=$(cd "$(dirname "$0")"; pwd)
 
-# Install github cli
-if ! command -v gh
-then
-  echo "Attempting to install github cli"
-  if command -v apt
-  then
-    # Might have to register another package source
-    # https://github.com/cli/cli/blob/trunk/docs/install_linux.md
-    sudo apt install -y gh
-  else
-    if command -v apk
-    then
-      sudo apk update && sudo apk add --no-cache github-cli
-    else
-      echo "github cli not installed, don't know how to install it"
-    fi
-  fi
-fi
-
 # Generate a unique petname for this machine instance
 if [ -s ~/.petname ]
 then
