@@ -1,6 +1,10 @@
 #!/bin/sh
 # Codespaces location: /workspaces/.codespaces/.persistedshare/dotfiles/codespaces-post-start
 # execution log: /workspaces/.codespaces/.persistedshare/creation.log
+# testing:
+# gh cs create --status --repo github/github
+# gh cs list
+# gh cs list | tail -n 1 | cut -f 1 | xargs gh cs delete -c
 
 SELFDIR=$(cd "$(dirname "$0")"; pwd)
 
