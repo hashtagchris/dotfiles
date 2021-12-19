@@ -1,4 +1,5 @@
 #!/bin/sh
+# Codespaces location: /workspaces/.codespaces/.persistedshare/dotfiles/codespaces-post-start
 
 SELFDIR=$(cd "$(dirname "$0")"; pwd)
 
@@ -11,10 +12,13 @@ SELFDIR=$(cd "$(dirname "$0")"; pwd)
 go install github.com/dustinkirkland/golang-petname/cmd/petname@latest
 
 # Generate a unique petname for this machine instance
-if ! [[ -s "~/.machine_name" ]]
+if ! [ -s ~/.petname ]
 then
-  $HOME/go/bin/petname > ~/.machine_name
+  $HOME/go/bin/petname > ~/.petname
+  echo "Generated petname: $(cat ~/.petname)"
 fi
+
+$SELFDIR/update-vscode-settings.sh
 
 # Install tmux config
 cp $SELFDIR/.tmux.conf ~/
