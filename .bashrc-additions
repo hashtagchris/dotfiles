@@ -80,4 +80,6 @@ then
     export PATH=$PATH:/workspaces/github/bin
 fi
 
-~/update-vscode-settings
+# Redirect output to avoid error response from `gh cs create --status`:
+# show status: failed to poll state changes from codespace: get post create output: unmarshal output: invalid character 'C' looking for beginning of value
+~/update-vscode-settings >> /tmp/dotfiles.log
