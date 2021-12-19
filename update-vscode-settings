@@ -26,4 +26,10 @@ then
   git update-index --skip-worktree $SETTINGS_PATH
 fi
 
+mkdir -p /tmp/update-vscode-settings
+echo $CODESPACE_VSCODE_FOLDER > /tmp/update-vscode-settings/vscode_folder
+echo $SETTINGS_PATH > /tmp/update-vscode-settings/path
+cp $SETTINGS_PATH /tmp/update-vscode-settings/before.json
+
 $SELFDIR/update-vscode-settings.js $SETTINGS_PATH $PETNAME $CODESPACE_NAME_SUFFIX
+cp $SETTINGS_PATH /tmp/update-vscode-settings/after.json
