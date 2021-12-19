@@ -22,4 +22,4 @@ cp $SELFDIR/.tmux.conf ~/
 
 # Add stuff to .bashrc
 echo >> ~/.bashrc
-# cat $SELFDIR/.bashrc-additions >> ~/.bashrc
+cat $SELFDIR/.bashrc-additions >> ~/.bashrc
