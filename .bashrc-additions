@@ -1,4 +1,4 @@
-# dotfile additions
+# hashtagchris' dotfile additions: You've tried the best, now try the rest
 # https://github.com/hashtagchris/dotfiles/blob/main/.bashrc-additions
 export PATH=$PATH:$HOME/go/bin:/workspaces/github/bin
 
