@@ -4,6 +4,8 @@
 
 SELFDIR=$(cd "$(dirname "$0")"; pwd)
 
+$SELFDIR/set-petname
+
 # Install tmux config
 cp $SELFDIR/.tmux.conf ~/
 
@@ -20,5 +22,3 @@ else
   echo >> ~/.bashrc
   echo "source ~/.bashrc-additions" >> ~/.bashrc
 fi
-
-$SELFDIR/set-petname
