@@ -3,16 +3,30 @@
 
 SELFDIR=$(cd "$(dirname "$0")"; pwd)
 
-# Install packages here
-# See https://github.com/MikeMcQuaid/dotfiles/blob/master/script/codespaces-post-start
-# apt-get install -y \
-#   tmux
+# Install github cli
+if ! command -v gh > /dev/null
+then
+  echo "Attempting to install github cli..."
+  if command -v apt
+  then
+    # Might have to register another package source
+    # https://github.com/cli/cli/blob/trunk/docs/install_linux.md
+    sudo apt install -y gh
+  else
+    if command -v apk
+    then
+      sudo apk update && sudo apk install github-cli
+    else
+      echo "github cli not installed, don't know how to install it"
+    fi
+  fi
+fi
 
 # Generate a unique petname for this machine instance
 if ! [ -s ~/.petname ]
 then
   # If go is installed, install golang-petname utility to GOBIN
-  if command -v go
+  if command -v go > /dev/null
   then
     go install github.com/dustinkirkland/golang-petname/cmd/petname@latest
       $HOME/go/bin/petname > ~/.petname
