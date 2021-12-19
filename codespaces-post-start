@@ -15,7 +15,7 @@ then
   else
     if command -v apk
     then
-      sudo apk update && sudo apk install github-cli
+      sudo apk update && sudo apk add --no-cache github-cli
     else
       echo "github cli not installed, don't know how to install it"
     fi
