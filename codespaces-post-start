@@ -45,10 +45,14 @@ $SELFDIR/update-vscode-settings.sh
 # Install tmux config
 cp $SELFDIR/.tmux.conf ~/
 
-# Add stuff to .bashrc
-if ! grep -q hashtagchris ~/.bashrc
+cp $SELFDIR/.bashrc-additions ~/
+
+# Source additions from ~/.bashrc
+if grep -q "source ~/.bashrc-additions" ~/.bashrc
 then
-  echo "Adding code to ~/.bashrc"
+  echo "~/.bashrc already updated"
+else
+  echo "Adding bashrc additions to ~/.bashrc"
   echo >> ~/.bashrc
-  cat $SELFDIR/.bashrc-additions >> ~/.bashrc
+  echo "source ~/.bashrc-additions" >> ~/.bashrc
 fi
