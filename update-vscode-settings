@@ -1,5 +1,11 @@
 #!/bin/sh
 
+if [ -z $CODESPACE_VSCODE_FOLDER ]
+then
+  echo "CODESPACE_VSCODE_FOLDER not set, skipping vscode setting.json updates"
+  exit 0
+fi
+
 if ! command -v node > /dev/null
 then
   echo "node not installed, skipping vscode setting.json updates"

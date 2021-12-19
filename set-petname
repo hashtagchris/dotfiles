@@ -22,7 +22,7 @@ go install github.com/dustinkirkland/golang-petname/cmd/petname@latest
 # https://github.com/golang/go/issues/23439#issuecomment-582483567
 if [ -z $GOBIN ]
 then
-GOBIN="$(go env GOPATH)/bin"
+    GOBIN="$(go env GOPATH)/bin"
 fi
 echo "GOBIN: $GOBIN"
 

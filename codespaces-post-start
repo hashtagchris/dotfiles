@@ -1,5 +1,6 @@
 #!/bin/sh
 # Codespaces location: /workspaces/.codespaces/.persistedshare/dotfiles/codespaces-post-start
+# execution log: /workspaces/.codespaces/.persistedshare/creation.log
 
 SELFDIR=$(cd "$(dirname "$0")"; pwd)
 
