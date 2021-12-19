@@ -19,7 +19,7 @@ fi
 # Install tmux config
 cp $SELFDIR/.tmux.conf ~/
 
-cat >> ~/.bashrc << HERE
+cat >> ~/.bashrc << `HERE`
 
 # hashtagchris/dotfile additions
 export PATH=\$PATH:/workspaces/github/bin
