@@ -3,26 +3,6 @@
 
 SELFDIR=$(cd "$(dirname "$0")"; pwd)
 
-# Generate a unique petname for this machine instance
-if [ -s ~/.petname ]
-then
-  echo "petname already set to \"$(cat ~/.petname)\""
-else
-  # If go is installed, install golang-petname utility to GOBIN
-  if command -v go
-  then
-    echo "installing golang-petname"
-    go install github.com/dustinkirkland/golang-petname/cmd/petname@latest
-      $HOME/go/bin/petname > ~/.petname
-      echo "Generated petname: $(cat ~/.petname)"
-  else
-    echo "go not installed, skipping petname generation"
-    echo "no-petname" > ~/.petname
-  fi
-fi
-
-$SELFDIR/update-vscode-settings.sh
-
 # Install tmux config
 cp $SELFDIR/.tmux.conf ~/
 
@@ -37,3 +17,6 @@ else
   echo >> ~/.bashrc
   echo "source ~/.bashrc-additions" >> ~/.bashrc
 fi
+
+$SELFDIR/set-petname
+$SELFDIR/update-vscode-settings
