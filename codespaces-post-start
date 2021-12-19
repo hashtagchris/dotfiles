@@ -13,7 +13,7 @@ go install github.com/dustinkirkland/golang-petname/cmd/petname@latest
 
 # Generate a unique petname for this machine instance
 # Another option is to use $CODESPACE_NAME as a default machine name
-if [[ ! -f "${HOME}/.machine_name" ]]; then
+if ! [[ -s "~/.machine_name" ]]; then
   $HOME/go/bin/petname > ~/.machine_name
 fi
 
