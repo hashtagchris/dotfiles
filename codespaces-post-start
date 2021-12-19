@@ -2,18 +2,17 @@
 
 SELFDIR=$(cd "$(dirname "$0")"; pwd)
 
-# Debugging
-echo "" >> /tmp/my-log
-echo "invoke: $0" >> /tmp/my-log
-echo "pwd: `pwd`" >> /tmp/my-log
-echo "SELFDIR: $SELFDIR" >> /tmp/my-log
+# Install packages here
+# See https://github.com/MikeMcQuaid/dotfiles/blob/master/script/codespaces-post-start
+# apt-get install -y \
+#   tmux
 
 # Install golang-petname utility to GOBIN
 go install github.com/dustinkirkland/golang-petname/cmd/petname@latest
 
 # Generate a unique petname for this machine instance
-# Another option is to use $CODESPACE_NAME as a default machine name
-if ! [[ -s "~/.machine_name" ]]; then
+if ! [[ -s "~/.machine_name" ]]
+then
   $HOME/go/bin/petname > ~/.machine_name
 fi
 
@@ -21,5 +20,8 @@ fi
 cp $SELFDIR/.tmux.conf ~/
 
 # Add stuff to .bashrc
-echo >> ~/.bashrc
-cat $SELFDIR/.bashrc-additions >> ~/.bashrc
+if ! grep -q hashtagchris ~/.bashrc
+then
+  echo >> ~/.bashrc
+  cat $SELFDIR/.bashrc-additions >> ~/.bashrc
+fi
