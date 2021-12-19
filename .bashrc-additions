@@ -1,0 +1,20 @@
+
+# hashtagchris/dotfile additions
+export PATH=\$PATH:/workspaces/github/bin
+
+# Give each codespace a unique prompt
+__custom_bash_prompt() {
+    local machinepart="\[\033[0;31m\][SET ~/.machine_name]"
+    if [[ -f "${HOME}/.machine_name" ]]; then
+        machinepart="\[\033[0;32m\]$(cat ${HOME}/.machine_name)"
+    fi
+
+    local returnpart='`export XIT=$? \
+        && [ "$XIT" -ne "0" ] && echo -n "\[\033[1;31m\]➜" || echo -n "\[\033[0m\]➜"`'
+
+    local lightblue='\[\033[1;34m\]'
+    local removecolor='\[\033[0m\]'
+    PS1="${machinepart} ${returnpart} ${lightblue}\w${removecolor} \$ "
+    unset -f __custom_bash_prompt
+}
+__custom_bash_prompt
