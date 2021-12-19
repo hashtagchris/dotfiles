@@ -1,20 +1,24 @@
 # dotfile additions
 # https://github.com/hashtagchris/dotfiles/blob/main/.bashrc-additions
-export PATH=$PATH:/workspaces/github/bin
+export PATH=$PATH:$HOME/go/bin:/workspaces/github/bin
 
 # Give each codespace a unique prompt
+# https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux
 __custom_bash_prompt() {
     local machinepart="\[\033[0;31m\][SET ~/.machine_name]"
     if [[ -f "${HOME}/.machine_name" ]]; then
         machinepart="\[\033[0;32m\]$(cat ${HOME}/.machine_name)"
     fi
 
+    # the codespace name's suffix, in light gray
+    local codespaceid="\[\033[0;37m\]$(echo $CODESPACE_NAME | cut -d- -f4)"
+
     local returnpart='`export XIT=$? \
         && [ "$XIT" -ne "0" ] && echo -n "\[\033[1;31m\]➜" || echo -n "\[\033[0m\]➜"`'
 
     local lightblue='\[\033[1;34m\]'
     local removecolor='\[\033[0m\]'
-    PS1="${machinepart} ${returnpart} ${lightblue}\w${removecolor} \$ "
+    PS1="${machinepart} ${codespaceid} ${returnpart} ${lightblue}\w${removecolor} \$ "
     unset -f __custom_bash_prompt
 }
 __custom_bash_prompt
