@@ -22,12 +22,14 @@ install_github_cli() {
     if ! command -v gh
     then
         echo "Attempting to install github cli"
+        # debian and ubuntu use apt-get
         if command -v apt
         then
             # Might have to register another package source
             # https://github.com/cli/cli/blob/trunk/docs/install_linux.md
             sudo apt install -y gh
         else
+            # alpine uses apk
             if command -v apk
             then
                 sudo apk update && sudo apk add --no-cache github-cli
