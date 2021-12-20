@@ -40,8 +40,9 @@ install_github_cli() {
     fi
 }
 
-# give each codespace a unique prompt
+# Give each codespace a unique prompt: {petname} {codespace_suffix} ➜ {path} $
 # https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux
+# based on the standard Codespaces bash prompt theme. See https://github.com/microsoft/vscode-dev-containers/blob/6e97392e224a3bcf392f3b5b1cd171697e4b4764/script-library/common-debian.sh#L297-L325
 __custom_bash_prompt() {
     local petname="\[\033[0;31m\][SET ~/.petname]"
     if [[ -f "${HOME}/.petname" ]]; then
