@@ -14,9 +14,23 @@ const machineName = process.argv[4]
 const json = fs
   .readFileSync(settingsFile, 'utf8')
   .replace(new RegExp(/(\/\/.*)/, 'gi'), '')
+  // remove any trailing commas in the "json"
+  .replace(new RegExp(/(,)(\s*)(\})/, 'g'), '$3')
   .trim()
 
-const settings = JSON.parse(json)
+// console.log(json)
+// console.log("----------------------------------------")
+
+let settings
+const config = JSON.parse(json)
+if (settingsFile.endsWith('.code-workspace')) {
+  if (!config['settings']) {
+    config['settings'] = {}
+  }
+  settings = config['settings']
+} else {
+  settings = config
+}
 
 let backgroundColor
 if (settings['workbench.colorCustomizations'] && settings['workbench.colorCustomizations']['activityBar.background']) {
@@ -31,7 +45,7 @@ settings['workbench.colorCustomizations'] = {}
 settings['workbench.colorCustomizations']['activityBar.background'] = backgroundColor
 settings['workbench.colorCustomizations']['titleBar.activeBackground'] = backgroundColor
 
-const replacementJson = JSON.stringify(settings, null, 2)
+const replacementJson = JSON.stringify(config, null, 2)
 
 // console.log(replacementJson)
 fs.writeFileSync(settingsFile, replacementJson, 'utf8')

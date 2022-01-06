@@ -1,11 +1,5 @@
 #!/bin/sh
 
-if [ -z $CODESPACE_VSCODE_FOLDER ]
-then
-  echo "CODESPACE_VSCODE_FOLDER not set, skipping vscode setting.json updates"
-  exit 0
-fi
-
 if ! command -v node > /dev/null
 then
   echo "node not installed, skipping vscode setting.json updates"
@@ -13,29 +7,37 @@ then
 fi
 
 SELFDIR=$(cd "$(dirname "$0")"; pwd)
-
-SETTINGS_DIR=$CODESPACE_VSCODE_FOLDER/.vscode
-SETTINGS_PATH=$SETTINGS_DIR/settings.json
 PETNAME="$(cat ~/.petname)"
 CODESPACE_NAME_SUFFIX="${CODESPACE_NAME##*-}"
 
-# Ensure settings.json exists
-if ! [ -s $SETTINGS_PATH ]
+if [ $CODESPACE_VSCODE_FOLDER ]
 then
-  mkdir -p $SETTINGS_DIR
-  echo "{}" > $SETTINGS_PATH
-fi
+  SETTINGS_DIR=$CODESPACE_VSCODE_FOLDER/.vscode
+  SETTINGS_PATH=$SETTINGS_DIR/settings.json
 
-# If settings.json is committed, don't track changes
-if git ls-files --error-unmatch $SETTINGS_PATH > /dev/null 2>&1
+  # Ensure settings.json exists
+  if ! [ -s $SETTINGS_PATH ]
+  then
+    mkdir -p $SETTINGS_DIR
+    echo "{}" > $SETTINGS_PATH
+  fi
+
+  # If settings.json is committed, don't track changes
+  if git ls-files --error-unmatch $SETTINGS_PATH > /dev/null 2>&1
+  then
+    git update-index --skip-worktree $SETTINGS_PATH
+  fi
+
+  mkdir -p /tmp/update-vscode-settings
+  echo $CODESPACE_VSCODE_FOLDER > /tmp/update-vscode-settings/vscode_folder
+  echo $SETTINGS_PATH > /tmp/update-vscode-settings/path
+  cp $SETTINGS_PATH /tmp/update-vscode-settings/before.json
+
+  $SELFDIR/update-vscode-settings.js $SETTINGS_PATH $PETNAME $CODESPACE_NAME_SUFFIX
+  cp $SETTINGS_PATH /tmp/update-vscode-settings/after.json
+elif [ $CODESPACE_VSCODE_WORKSPACE ]
 then
-  git update-index --skip-worktree $SETTINGS_PATH
+  $SELFDIR/update-vscode-settings.js $CODESPACE_VSCODE_WORKSPACE $PETNAME $CODESPACE_NAME_SUFFIX
+else
+  echo "CODESPACE_VSCODE_FOLDER nor CODESPACE_VSCODE_WORKSPACE isn't set, skipping vscode setting.json updates"
 fi
-
-mkdir -p /tmp/update-vscode-settings
-echo $CODESPACE_VSCODE_FOLDER > /tmp/update-vscode-settings/vscode_folder
-echo $SETTINGS_PATH > /tmp/update-vscode-settings/path
-cp $SETTINGS_PATH /tmp/update-vscode-settings/before.json
-
-$SELFDIR/update-vscode-settings.js $SETTINGS_PATH $PETNAME $CODESPACE_NAME_SUFFIX
-cp $SETTINGS_PATH /tmp/update-vscode-settings/after.json
