@@ -26,6 +26,7 @@ then
   SETTINGS_PATH=$CODESPACE_VSCODE_WORKSPACE
 else
   echo "CODESPACE_VSCODE_FOLDER nor CODESPACE_VSCODE_WORKSPACE isn't set, skipping vscode setting.json updates"
+  exit 0
 fi
 
 if [ -L $SETTINGS_PATH ]
