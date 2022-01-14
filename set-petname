@@ -7,6 +7,14 @@ then
     exit 0
 fi
 
+CODESPACES_DISPLAY_NAME=$(gh api /user/codespaces/$CODESPACE_NAME | jq -r .display_name)
+if [ "$CODESPACES_DISPLAY_NAME" ]
+then
+    echo "Using Codespaces display name \"$CODESPACES_DISPLAY_NAME\" as petname"
+    echo $CODESPACES_DISPLAY_NAME > ~/.petname
+    exit 0
+fi
+
 # If go is installed, install golang-petname utility to GOBIN
 if ! command -v go
 then
