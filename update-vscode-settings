@@ -49,5 +49,5 @@ mkdir -p /tmp/update-vscode-settings
 echo $SETTINGS_PATH > /tmp/update-vscode-settings/path
 cp $SETTINGS_PATH /tmp/update-vscode-settings/before.json
 
-$SELFDIR/update-vscode-settings.js $SETTINGS_PATH $PETNAME $CODESPACE_NAME_SUFFIX
+$SELFDIR/update-vscode-settings.js "$SETTINGS_PATH" "$PETNAME" "$CODESPACE_NAME_SUFFIX"
 cp $SETTINGS_PATH /tmp/update-vscode-settings/after.json
