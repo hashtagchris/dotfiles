@@ -7,8 +7,12 @@ export GOPRIVATE=
 export GONOPROXY=
 export GONOSUMDB='github.com/github/*'
 
-if [ $GITHUB_REPOSITORY == "github/github" ]; then
-    echo "machine goproxy.githubapp.com login nobody password $GITHUB_TOKEN" >> $HOME/.netrc
+if [ "github/github" == $GITHUB_REPOSITORY ]; then
+    export PATH=$PATH:/workspaces/github/bin
+
+    if [ ! -e "$HOME/.netrc" ]; then
+        echo "machine goproxy.githubapp.com login nobody password $GITHUB_TOKEN" >> $HOME/.netrc
+    fi
 fi
 
 # gha is short for GitHub Authentication
@@ -83,12 +87,6 @@ then
 
     # add GOBIN to path
     export PATH=$PATH:$GOBIN
-fi
-
-# path updates
-if [ "github/github" == $GITHUB_REPOSITORY ]
-then
-    export PATH=$PATH:/workspaces/github/bin
 fi
 
 # Redirect output to avoid error response from `gh cs create --status`:
