@@ -1,6 +1,12 @@
 # hashtagchris' dotfile additions: You've tried the best, now try the rest
 # https://github.com/hashtagchris/dotfiles/blob/main/.bashrc-additions
 
+export PATH=$PATH:$HOME/go/bin:/workspaces/github/bin
+export GOPROXY=https://goproxy.githubapp.com/mod,https://proxy.golang.org/,direct
+export GOPRIVATE=
+export GONOPROXY=
+export GONOSUMDB='github.com/github/*'
+
 # gha is short for GitHub Authentication
 # Use this if you have repository write but git push fails with 403 Forbidden or similar
 gha() {
@@ -61,8 +67,6 @@ __custom_bash_prompt() {
     unset -f __custom_bash_prompt
 }
 __custom_bash_prompt
-
-export PATH=$PATH:$HOME/go/bin:/workspaces/github/bin
 
 # golang setup
 if command -v go > /dev/null
