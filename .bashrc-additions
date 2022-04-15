@@ -7,6 +7,10 @@ export GOPRIVATE=
 export GONOPROXY=
 export GONOSUMDB='github.com/github/*'
 
+if [ $GITHUB_REPOSITORY == "github/github" ]; then
+    echo "machine goproxy.githubapp.com login nobody password $GITHUB_TOKEN" >> $HOME/.netrc
+fi
+
 # gha is short for GitHub Authentication
 # Use this if you have repository write but git push fails with 403 Forbidden or similar
 gha() {
