@@ -17,6 +17,8 @@ cp $SELFDIR/.bashrc-additions ~/
 cp $SELFDIR/update-vscode-settings ~/
 cp $SELFDIR/update-vscode-settings.js ~/
 
+cp $SELFDIR/vscode/workspaces/* /workspaces/actions/
+
 # Source additions from ~/.bashrc
 if grep -q "source ~/.bashrc-additions" ~/.bashrc
 then
