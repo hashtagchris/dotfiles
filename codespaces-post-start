@@ -28,3 +28,6 @@ else
   echo >> ~/.bashrc
   echo "source ~/.bashrc-additions" >> ~/.bashrc
 fi
+
+# Add mssql profile
+$SELFDIR/vscode/configure-mssql

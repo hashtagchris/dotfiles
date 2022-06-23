@@ -1,0 +1,14 @@
+{
+  "mssql.connections": [
+    {
+      "profileName": "added-via-settings.json",
+      "authenticationType": "SqlLogin",
+      "server": "mssql",
+      "database": "",
+      "user": "sa",
+      "password": "",
+      "emptyPasswordInput": false,
+      "savePassword": true
+    }
+  ]
+}

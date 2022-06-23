@@ -13,6 +13,7 @@ const machineName = process.argv[4]
 
 const json = fs
   .readFileSync(settingsFile, 'utf8')
+  // remove comments in the "json"
   .replace(new RegExp(/(\/\/.*)/, 'gi'), '')
   // remove any trailing commas in the "json"
   .replace(new RegExp(/(,)(\s*)(\})/, 'g'), '$3')
