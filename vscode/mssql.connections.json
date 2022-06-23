@@ -1,7 +1,7 @@
 {
   "mssql.connections": [
     {
-      "profileName": "added-via-settings.json",
+      "profileName": "dotfiles",
       "authenticationType": "SqlLogin",
       "server": "mssql",
       "database": "",
