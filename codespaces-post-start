@@ -30,4 +30,4 @@ else
 fi
 
 # Add mssql profile
-$SELFDIR/vscode/configure-mssql
+$SELFDIR/vscode/add-mssql-connections
