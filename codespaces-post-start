@@ -29,5 +29,5 @@ else
   echo "source ~/.bashrc-additions" >> ~/.bashrc
 fi
 
-# Add mssql profile
-$SELFDIR/vscode/add-mssql-connections
+# Add mssql profile - moved to github/actions-dotnet script
+# $SELFDIR/vscode/add-mssql-connections
