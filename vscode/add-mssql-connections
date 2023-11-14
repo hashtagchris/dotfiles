@@ -1,8 +1,0 @@
-#!/bin/sh
-
-SELFDIR=$(cd "$(dirname "$0")"; pwd)
-
-mkdir -p ~/.sqlsecrets
-cat $SELFDIR/mssql-sqlsecrets.json.template | perl -ple 's/__PASSWORD__/$ENV{ACTIONS_DOTNET_MSSQL_PASSWORD}/g' > ~/.sqlsecrets/sqlsecrets.json
-
-$SELFDIR/../add-vscode-settings.js "$SELFDIR/mssql.connections.json" ~/.vscode-remote/data/Machine/settings.json
